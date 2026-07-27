@@ -1,6 +1,6 @@
 // sw.js: オフライン閲覧のためのService Worker(キャッシュファースト)
 // CACHE_VERSION を上げると古いキャッシュが破棄され、新しいファイルに置き換わります。
-const CACHE_VERSION = "world-heritage-globe-v12-swfix";
+const CACHE_VERSION = "world-heritage-globe-v13-cmp";
 
 // 同一オリジンの必須ファイル
 const PRECACHE_URLS = [
