@@ -368,3 +368,100 @@ html, body {
   color: var(--text-main);
   font-weight: 600;
 }
+
+/* 情報ボタン(ヘッダー左下、about/privacy/寄付への導線) */
+#info-btn {
+  position: fixed;
+  left: 10px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 12;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: rgba(5, 7, 15, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-main);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* 情報モーダル */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 24px 20px 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-panel h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: var(--text-main);
+  font-family: var(--font-serif);
+}
+
+.modal-desc {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-sub);
+}
+
+.modal-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-links a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  color: var(--text-sub);
+  cursor: pointer;
+}

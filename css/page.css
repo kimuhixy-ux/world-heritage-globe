@@ -1,0 +1,95 @@
+/* about.html / privacy.html 等、通常のスクロールページ用スタイル。
+   地球儀画面用のcss/style.css(html/body固定・overflow hidden)とは独立させている。 */
+
+* {
+  box-sizing: border-box;
+}
+
+body.page-body {
+  margin: 0;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+  background: #05070f;
+  color: #f2f0e8;
+}
+
+#app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(14px + env(safe-area-inset-top)) 0 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 24px;
+}
+
+.page-header .brand {
+  font-family: "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f4c95d;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+.page-header .main-nav a {
+  font-size: 13px;
+  color: #f2f0e8;
+  text-decoration: none;
+  border-bottom: 1px solid #f2f0e8;
+}
+
+.page-title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #f4c95d;
+  font-family: "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
+}
+
+.page-lead {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: rgba(242, 240, 232, 0.65);
+  line-height: 1.7;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 10px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card a {
+  color: #f4c95d;
+}
+
+.page-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  color: rgba(242, 240, 232, 0.55);
+  text-align: center;
+  line-height: 1.8;
+}
+
+.footer-links a {
+  color: #f2f0e8;
+}

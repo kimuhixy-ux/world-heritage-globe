@@ -33,6 +33,20 @@
     </div>
   </header>
 
+  <button id="info-btn" title="このアプリについて" aria-label="このアプリについて">ℹ️</button>
+
+  <div id="info-modal" class="modal-overlay" hidden>
+    <div class="modal-panel">
+      <button id="info-modal-close" class="modal-close" aria-label="閉じる">✕</button>
+      <h2>世界遺産グローブ</h2>
+      <p class="modal-desc">ユネスコ世界遺産1,258件を回転する3D地球儀上で探索できるPWAです。</p>
+      <ul class="modal-links">
+        <li><a href="about.html">運営者情報</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div id="card-backdrop"></div>
   <section id="info-card" aria-hidden="true">
     <div class="info-card-handle"></div>
@@ -68,6 +82,10 @@
   </section>
 
   <script src="https://unpkg.com/globe.gl"></script>
+  <script src="js/config.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/ui-info.js"></script>
+  <script src="js/donate.js"></script>
+  <script src="js/ads.js"></script>
 </body>
 </html>

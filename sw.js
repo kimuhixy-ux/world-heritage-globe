@@ -1,6 +1,6 @@
 // sw.js: オフライン閲覧のためのService Worker(キャッシュファースト)
 // CACHE_VERSION を上げると古いキャッシュが破棄され、新しいファイルに置き換わります。
-const CACHE_VERSION = "world-heritage-globe-v6";
+const CACHE_VERSION = "world-heritage-globe-v7";
 
 // 同一オリジンの必須ファイル
 const PRECACHE_URLS = [
@@ -8,7 +8,14 @@ const PRECACHE_URLS = [
   "./index.html",
   "./manifest.json",
   "./css/style.css",
+  "./css/page.css",
+  "./about.html",
+  "./privacy.html",
+  "./js/config.js",
   "./js/app.js",
+  "./js/ui-info.js",
+  "./js/donate.js",
+  "./js/ads.js",
   "./data/heritage.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
