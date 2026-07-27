@@ -90,7 +90,7 @@ function initInfoCard(visitedStore) {
     categoryEl.textContent = site.danger
       ? S.dangerCategoryLabel(categoryLabel)
       : categoryLabel;
-    nameEl.textContent = site.name;
+    nameEl.textContent = pickName(site);
     metaEl.textContent = S.meta(site.country, site.year);
     descriptionEl.textContent = pickDescription(site);
     officialLink.href = site.url;
@@ -158,7 +158,7 @@ function initVisitedList(visitedStore, data, infoCard) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "visited-item";
-      btn.innerHTML = `${site.name}<span class="visited-item-country">${S.meta(site.country, site.year)}</span>`;
+      btn.innerHTML = `${pickName(site)}<span class="visited-item-country">${S.meta(site.country, site.year)}</span>`;
       btn.addEventListener("click", () => {
         close();
         infoCard.show(site);
@@ -265,7 +265,7 @@ function initGlobe(container, infoCard) {
     .pointAltitude(0.01)
     .pointRadius(0.28)
     .pointResolution(6)
-    .pointLabel((d) => d.name)
+    .pointLabel((d) => pickName(d))
     .ringLat("lat")
     .ringLng("lng")
     .ringColor((d) =>
@@ -340,7 +340,12 @@ function initExplorer(world, data, visitedStore) {
       if (d.year > year) return false;
       if (!activeCategories.has(d.category)) return false;
       if (dangerOnly && !d.danger) return false;
-      if (q && !d.name.toLowerCase().includes(q) && !d.country.toLowerCase().includes(q)) {
+      if (
+        q &&
+        !d.name.toLowerCase().includes(q) &&
+        !pickName(d).toLowerCase().includes(q) &&
+        !d.country.toLowerCase().includes(q)
+      ) {
         return false;
       }
       return true;

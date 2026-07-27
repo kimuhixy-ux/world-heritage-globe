@@ -1,4 +1,5 @@
 scripts/.texture_cache/
 .DS_Store
 .translate-batches/
+.translate-names-batches/
 .wrangler/
