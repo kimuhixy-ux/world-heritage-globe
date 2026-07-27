@@ -92,7 +92,7 @@ function initInfoCard(visitedStore) {
       : categoryLabel;
     nameEl.textContent = site.name;
     metaEl.textContent = S.meta(site.country, site.year);
-    descriptionEl.textContent = site.description;
+    descriptionEl.textContent = pickDescription(site);
     officialLink.href = site.url;
     youtubeLink.href = site.youtube_search_url;
     badgeEl.hidden = !badge;
@@ -444,6 +444,11 @@ function initExplorer(world, data, visitedStore) {
   render();
 }
 
+function hideLoadingOverlay() {
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) overlay.classList.add("hidden");
+}
+
 async function main() {
   const container = document.getElementById("globe-container");
   try {
@@ -455,12 +460,14 @@ async function main() {
 
     const world = initGlobe(container, infoCard);
     initExplorer(world, data, visitedStore);
+    hideLoadingOverlay();
 
     const todaysSite = pickTodaysSite(data);
     world.pointOfView({ lat: todaysSite.lat, lng: todaysSite.lng, altitude: 1.6 }, 1500);
     setTimeout(() => infoCard.show(todaysSite, { badge: true }), 1700);
   } catch (err) {
     console.error(err);
+    hideLoadingOverlay();
     container.innerHTML = `<p style="color:#fff;padding:24px;">${S.loadError}</p>`;
   }
 }
