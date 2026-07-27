@@ -91,7 +91,7 @@ function initInfoCard(visitedStore) {
       ? S.dangerCategoryLabel(categoryLabel)
       : categoryLabel;
     nameEl.textContent = pickName(site);
-    metaEl.textContent = S.meta(site.country, site.year);
+    metaEl.textContent = S.meta(pickCountry(site), site.year);
     descriptionEl.textContent = pickDescription(site);
     officialLink.href = site.url;
     youtubeLink.href = site.youtube_search_url;
@@ -158,7 +158,7 @@ function initVisitedList(visitedStore, data, infoCard) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "visited-item";
-      btn.innerHTML = `${pickName(site)}<span class="visited-item-country">${S.meta(site.country, site.year)}</span>`;
+      btn.innerHTML = `${pickName(site)}<span class="visited-item-country">${S.meta(pickCountry(site), site.year)}</span>`;
       btn.addEventListener("click", () => {
         close();
         infoCard.show(site);
@@ -344,7 +344,8 @@ function initExplorer(world, data, visitedStore) {
         q &&
         !d.name.toLowerCase().includes(q) &&
         !pickName(d).toLowerCase().includes(q) &&
-        !d.country.toLowerCase().includes(q)
+        !d.country.toLowerCase().includes(q) &&
+        !pickCountry(d).toLowerCase().includes(q)
       ) {
         return false;
       }
