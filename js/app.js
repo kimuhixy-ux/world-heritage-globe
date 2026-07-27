@@ -7,12 +7,6 @@ const CATEGORY_COLOR = {
 };
 const DANGER_COLOR = "#ef5350";
 
-const CATEGORY_LABEL = {
-  Cultural: "文化遺産",
-  Natural: "自然遺産",
-  Mixed: "複合遺産",
-};
-
 const prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
@@ -22,9 +16,9 @@ function pointColor(d) {
 }
 
 async function loadHeritageData() {
-  const res = await fetch("data/heritage.json");
+  const res = await fetch(`${ROOT}data/heritage.json`);
   if (!res.ok) {
-    throw new Error(`heritage.json の読み込みに失敗しました (status: ${res.status})`);
+    throw new Error(S.fetchError(res.status));
   }
   return res.json();
 }
@@ -80,7 +74,7 @@ function initInfoCard(visitedStore) {
   function refreshVisitedButton() {
     if (!currentSite) return;
     const visited = visitedStore.has(currentSite.id);
-    visitedToggle.textContent = visited ? "✓ 訪問済み" : "訪問済みにする";
+    visitedToggle.textContent = visited ? S.visited : S.markVisited;
     visitedToggle.classList.toggle("active", visited);
   }
 
@@ -92,12 +86,12 @@ function initInfoCard(visitedStore) {
 
   function show(site, { badge = false } = {}) {
     currentSite = site;
-    const categoryLabel = CATEGORY_LABEL[site.category] || site.category;
+    const categoryLabel = S.categoryLabel[site.category] || site.category;
     categoryEl.textContent = site.danger
-      ? `⚠ 危機遺産 ・ ${categoryLabel}`
+      ? S.dangerCategoryLabel(categoryLabel)
       : categoryLabel;
     nameEl.textContent = site.name;
-    metaEl.textContent = `${site.country} ・ ${site.year ?? "?"}年登録`;
+    metaEl.textContent = S.meta(site.country, site.year);
     descriptionEl.textContent = site.description;
     officialLink.href = site.url;
     youtubeLink.href = site.youtube_search_url;
@@ -164,7 +158,7 @@ function initVisitedList(visitedStore, data, infoCard) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "visited-item";
-      btn.innerHTML = `${site.name}<span class="visited-item-country">${site.country} ・ ${site.year ?? "?"}年登録</span>`;
+      btn.innerHTML = `${site.name}<span class="visited-item-country">${S.meta(site.country, site.year)}</span>`;
       btn.addEventListener("click", () => {
         close();
         infoCard.show(site);
@@ -259,9 +253,9 @@ function initTapToOpen(world, infoCard) {
 
 function initGlobe(container, infoCard) {
   const world = Globe()(container)
-    .globeImageUrl("img/earth-day.jpg")
-    .bumpImageUrl("img/earth-bump.jpg")
-    .backgroundImageUrl("img/night-sky.png")
+    .globeImageUrl(`${ROOT}img/earth-day.jpg`)
+    .bumpImageUrl(`${ROOT}img/earth-bump.jpg`)
+    .backgroundImageUrl(`${ROOT}img/night-sky.png`)
     .showAtmosphere(true)
     .atmosphereColor("#5fb4ef")
     .atmosphereAltitude(0.18)
@@ -365,8 +359,8 @@ function initExplorer(world, data, visitedStore) {
       });
     }
     world.ringsData(rings);
-    yearLabel.textContent = `${slider.value}年`;
-    countLabel.textContent = `表示中 ${visible.length} / ${data.length}`;
+    yearLabel.textContent = S.yearLabel(slider.value);
+    countLabel.textContent = S.countLabel(visible.length, data.length);
 
     const q = searchText.trim();
     if (q && visible.length > 0) {
@@ -386,7 +380,7 @@ function initExplorer(world, data, visitedStore) {
       timer = null;
     }
     playBtn.textContent = "▶";
-    playBtn.setAttribute("aria-label", "再生");
+    playBtn.setAttribute("aria-label", S.play);
   }
 
   function play() {
@@ -395,7 +389,7 @@ function initExplorer(world, data, visitedStore) {
       render();
     }
     playBtn.textContent = "⏸";
-    playBtn.setAttribute("aria-label", "一時停止");
+    playBtn.setAttribute("aria-label", S.pause);
     timer = setInterval(() => {
       const next = Number(slider.value) + 1;
       if (next > maxYear) {
@@ -467,8 +461,7 @@ async function main() {
     setTimeout(() => infoCard.show(todaysSite, { badge: true }), 1700);
   } catch (err) {
     console.error(err);
-    container.innerHTML =
-      '<p style="color:#fff;padding:24px;">データの読み込みに失敗しました。ページを再読み込みしてください。</p>';
+    container.innerHTML = `<p style="color:#fff;padding:24px;">${S.loadError}</p>`;
   }
 }
 
@@ -476,6 +469,6 @@ main();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register(`${ROOT}sw.js`);
   });
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>World Heritage Globe</title>
+<meta name="description" content="Explore all UNESCO World Heritage sites on a rotating 3D globe">
+<link rel="canonical" href="https://kimuhixy.com/world-heritage-globe/en/">
+<link rel="alternate" hreflang="ja" href="https://kimuhixy.com/world-heritage-globe/">
+<link rel="alternate" hreflang="en" href="https://kimuhixy.com/world-heritage-globe/en/">
+<link rel="alternate" hreflang="x-default" href="https://kimuhixy.com/world-heritage-globe/">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#05070f">
+<link rel="apple-touch-icon" href="../icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="World Heritage Globe">
+</head>
+<body>
+  <div id="globe-container"></div>
+
+  <header id="app-header">
+    <div class="header-top-row">
+      <h1>World Heritage Globe</h1>
+      <button id="visited-counter" type="button" aria-label="Open visited list">
+        🏛 <span id="visited-count">0</span> / <span id="visited-total">0</span>
+      </button>
+    </div>
+    <div id="filter-bar">
+      <div id="category-toggles">
+        <button type="button" class="filter-chip active" data-category="Cultural">Cultural</button>
+        <button type="button" class="filter-chip active" data-category="Natural">Natural</button>
+        <button type="button" class="filter-chip active" data-category="Mixed">Mixed</button>
+        <button type="button" class="filter-chip" id="danger-toggle">⚠ In Danger only</button>
+      </div>
+      <input type="search" id="search-input" placeholder="Search by name or country" autocomplete="off">
+    </div>
+  </header>
+
+  <button id="info-btn" title="About this app" aria-label="About this app">ℹ️</button>
+
+  <div id="info-modal" class="modal-overlay" hidden>
+    <div class="modal-panel">
+      <button id="info-modal-close" class="modal-close" aria-label="Close">✕</button>
+      <h2>World Heritage Globe</h2>
+      <p class="modal-desc">Explore all 1,258 UNESCO World Heritage sites on a rotating 3D globe.</p>
+      <ul class="modal-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="../index.html">日本語</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="card-backdrop"></div>
+  <section id="info-card" aria-hidden="true">
+    <div class="info-card-handle"></div>
+    <button id="card-close" class="card-close" aria-label="Close">×</button>
+    <p id="card-badge" class="info-card-badge" hidden>Today's World Heritage Site</p>
+    <p id="card-category" class="info-card-category"></p>
+    <h2 id="card-name" class="info-card-name"></h2>
+    <p id="card-meta" class="info-card-meta"></p>
+    <p id="card-description" class="info-card-description"></p>
+    <div class="info-card-actions">
+      <a id="card-official-link" class="btn btn-primary" href="#" target="_blank" rel="noopener">Official Page</a>
+      <a id="card-youtube-link" class="btn btn-secondary" href="#" target="_blank" rel="noopener">Watch on YouTube</a>
+      <button id="card-visited-toggle" class="btn btn-secondary" type="button">Mark as visited</button>
+    </div>
+  </section>
+
+  <div id="visited-backdrop" class="card-backdrop-like"></div>
+  <section id="visited-list" aria-hidden="true">
+    <div class="info-card-handle"></div>
+    <button id="visited-close" class="card-close" aria-label="Close">×</button>
+    <h2 class="info-card-name">Visited Sites</h2>
+    <p id="visited-empty" class="info-card-meta">No visited sites yet.</p>
+    <ul id="visited-items"></ul>
+  </section>
+
+  <section id="timeline-bar">
+    <button id="timeline-play" aria-label="Play">▶</button>
+    <input type="range" id="timeline-slider" min="1978" max="2026" value="2026" step="1" aria-label="Inscription year">
+    <div id="timeline-info">
+      <span id="timeline-year">2026</span>
+      <span id="timeline-count">0</span>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/strings.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/ui-info.js"></script>
+  <script src="../js/donate.js"></script>
+  <script src="../js/ads.js"></script>
+</body>
+</html>

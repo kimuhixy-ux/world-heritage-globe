@@ -1,6 +1,6 @@
 // sw.js: オフライン閲覧のためのService Worker(キャッシュファースト)
 // CACHE_VERSION を上げると古いキャッシュが破棄され、新しいファイルに置き換わります。
-const CACHE_VERSION = "world-heritage-globe-v7";
+const CACHE_VERSION = "world-heritage-globe-v8";
 
 // 同一オリジンの必須ファイル
 const PRECACHE_URLS = [
@@ -11,6 +11,8 @@ const PRECACHE_URLS = [
   "./css/page.css",
   "./about.html",
   "./privacy.html",
+  "./js/i18n.js",
+  "./js/strings.js",
   "./js/config.js",
   "./js/app.js",
   "./js/ui-info.js",
@@ -22,6 +24,10 @@ const PRECACHE_URLS = [
   "./img/earth-day.jpg",
   "./img/earth-bump.jpg",
   "./img/night-sky.png",
+  "./en/index.html",
+  "./en/about.html",
+  "./en/privacy.html",
+  "./en/manifest.json",
 ];
 
 // Globe.gl本体(unpkgのCDN)。オフライン起動のため事前キャッシュする
