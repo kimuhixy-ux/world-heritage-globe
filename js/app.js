@@ -468,6 +468,14 @@ async function main() {
     initExplorer(world, data, visitedStore);
     hideLoadingOverlay();
 
+    const requestedId = new URLSearchParams(location.search).get("id");
+    const requestedSite = requestedId ? data.find((site) => site.id === requestedId) : null;
+    if (requestedSite) {
+      world.pointOfView({ lat: requestedSite.lat, lng: requestedSite.lng, altitude: 1.6 }, 800);
+      infoCard.show(requestedSite);
+      return;
+    }
+
     const todaysSite = pickTodaysSite(data);
     world.pointOfView({ lat: todaysSite.lat, lng: todaysSite.lng, altitude: 1.6 }, 1500);
     setTimeout(() => infoCard.show(todaysSite, { badge: true }), 1700);

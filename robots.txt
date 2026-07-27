@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kimuhixy.com/world-heritage-globe/sitemap.xml

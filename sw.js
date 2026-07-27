@@ -1,6 +1,6 @@
 // sw.js: オフライン閲覧のためのService Worker(キャッシュファースト)
 // CACHE_VERSION を上げると古いキャッシュが破棄され、新しいファイルに置き換わります。
-const CACHE_VERSION = "world-heritage-globe-v13-cmp";
+const CACHE_VERSION = "world-heritage-globe-v14-pseo";
 
 // 同一オリジンの必須ファイル
 const PRECACHE_URLS = [
@@ -82,6 +82,21 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
+
+  if (request.mode === "navigate" && new URL(request.url).pathname.includes("/items/")) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (!response.redirected) {
+            const clone = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(request).then((cached) => {
